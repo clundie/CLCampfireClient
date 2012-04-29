@@ -1,5 +1,5 @@
 //
-//  CLCampfire.h
+//  CLCampfireClient.h
 //  Campfire client
 //
 //  Created by Chris Lundie on 04/Apr/2012.
@@ -15,7 +15,7 @@
 #import "CLCampfireMessageType.h"
 
 
-@interface CLCampfire : NSObject
+@interface CLCampfireClient : NSObject
 
 - (id)initWithCompany:(NSString *)company URLCredential:(NSURLCredential *)URLCredential;
 - (void)joinRoomID:(long long)roomID completionHandler:(void(^)(NSError *))completionHandler messageHandler:(void(^)(CLCampfireMessage *))messageHandler;

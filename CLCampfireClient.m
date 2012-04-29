@@ -1,5 +1,5 @@
 //
-//  CLCampfire.m
+//  CLCampfireClient.m
 //  Campfire client
 //
 //  Created by Chris Lundie on 04/Apr/2012.
@@ -7,7 +7,7 @@
 //
 
 
-#import "CLCampfire.h"
+#import "CLCampfireClient.h"
 #import "CLStreamingJSONFetcher.h"
 #import "CLCampfireMessage.h"
 #import "CLCampfireUser.h"
@@ -20,7 +20,7 @@ static const NSTimeInterval _minRetryInterval = 1.0;
 static const NSTimeInterval _maxRetryInterval = 30.0;
 
 
-@interface CLCampfire ()
+@interface CLCampfireClient ()
 {
 @private
     NSString *_company;
@@ -34,7 +34,7 @@ static const NSTimeInterval _maxRetryInterval = 30.0;
 @end
 
 
-@implementation CLCampfire
+@implementation CLCampfireClient
 
 @synthesize company = _company;
 
