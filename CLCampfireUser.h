@@ -14,19 +14,20 @@
 #import "CLCampfireUserType.h"
 
 
-@interface CLCampfireUser : NSObject
+@interface CLCampfireUser : NSObject <NSCoding, NSCopying>
 
 + (id)userWithJSONObject:(NSDictionary *)jsonObject;
 
+- (id)initWithJSONObject:(NSDictionary *)jsonObject;
 - (NSDictionary *)jsonObject;
 
-@property (nonatomic, assign) long long userID;
-@property (nonatomic, copy) NSString *userName;
-@property (nonatomic, copy) NSString *email;
-@property (nonatomic, assign, getter=isAdmin) BOOL admin;
-@property (nonatomic, copy) NSDate *creationDate;
-@property (nonatomic, assign) enum CLCampfireUserType userType;
-@property (nonatomic, copy) NSURL *avatarURL;
-@property (nonatomic, copy) NSString *apiToken;
+@property (assign) long long userID;
+@property (copy) NSString *userName;
+@property (copy) NSString *email;
+@property (assign, getter=isAdmin) BOOL admin;
+@property (copy) NSDate *creationDate;
+@property (assign) enum CLCampfireUserType userType;
+@property (copy) NSURL *avatarURL;
+@property (copy) NSString *apiToken;
 
 @end

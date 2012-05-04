@@ -14,18 +14,19 @@
 #import "CLCampfireMessageType.h"
 
 
-@interface CLCampfireMessage : NSObject
+@interface CLCampfireMessage : NSObject <NSCoding, NSCopying>
 
 + (id)messageWithJSONObject:(NSDictionary *)jsonObject;
 
+- (id)initWithJSONObject:(NSDictionary *)jsonObject;
 - (NSDictionary *)jsonObject;
 
-@property (nonatomic, assign) enum CLCampfireMessageType messageType;
-@property (nonatomic, copy) NSString *body;
-@property (nonatomic, assign, getter=isStarred) BOOL starred;
-@property (nonatomic, assign) long long messageID;
-@property (nonatomic, assign) long long roomID;
-@property (nonatomic, assign) long long userID;
-@property (nonatomic, copy) NSDate *creationDate;
+@property (assign) enum CLCampfireMessageType messageType;
+@property (copy) NSString *body;
+@property (assign, getter=isStarred) BOOL starred;
+@property (assign) long long messageID;
+@property (assign) long long roomID;
+@property (assign) long long userID;
+@property (copy) NSDate *creationDate;
 
 @end

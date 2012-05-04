@@ -24,36 +24,58 @@
 
 + (id)messageWithJSONObject:(NSDictionary *)jsonObject
 {
-	CLCampfireMessage *message = [[CLCampfireMessage alloc] init];
-	NSString *messageType = [jsonObject objectForKey:@"type"];
-	if ([messageType isKindOfClass:[NSString class]]) {
-        message.messageType = [messageType cl_campfireMessageType];
-	}
-    NSString *body = [jsonObject objectForKey:@"body"];
-    if ([body isKindOfClass:[NSString class]]) {
-        message.body = body;
-    }
-    NSNumber *starred = [jsonObject objectForKey:@"starred"];
-    if ([starred isKindOfClass:[NSNumber class]]) {
-        message.starred = [starred boolValue];
-    }
-    NSNumber *messageID = [jsonObject objectForKey:@"id"];
-    if ([messageID isKindOfClass:[NSNumber class]]) {
-        message.messageID = [messageID longLongValue];
-    }
-    NSNumber *roomID = [jsonObject objectForKey:@"room_id"];
-    if ([roomID isKindOfClass:[NSNumber class]]) {
-        message.roomID = [roomID longLongValue];
-    }
-    NSNumber *userID = [jsonObject objectForKey:@"user_id"];
-    if ([userID isKindOfClass:[NSNumber class]]) {
-        message.userID = [userID longLongValue];
-    }
-    NSString *createdAt = [jsonObject objectForKey:@"created_at"];
-    if ([createdAt isKindOfClass:[NSString class]]) {
-        message.creationDate = [NSDate cl_dateWithCampfireDateString:createdAt];
-    }
+	CLCampfireMessage *message = [[CLCampfireMessage alloc] initWithJSONObject:jsonObject];
 	return message;
+}
+
+- (id)initWithJSONObject:(NSDictionary *)jsonObject
+{
+    self = [super init];
+    if (self != nil) {
+        {
+            NSString *messageType = [jsonObject objectForKey:@"type"];
+            if ([messageType isKindOfClass:[NSString class]]) {
+                self.messageType = [messageType cl_campfireMessageType];
+            }
+        }
+        {
+            NSString *body = [jsonObject objectForKey:@"body"];
+            if ([body isKindOfClass:[NSString class]]) {
+                self.body = body;
+            }
+        }
+        {
+            NSNumber *starred = [jsonObject objectForKey:@"starred"];
+            if ([starred isKindOfClass:[NSNumber class]]) {
+                self.starred = [starred boolValue];
+            }
+        }
+        {
+            NSNumber *messageID = [jsonObject objectForKey:@"id"];
+            if ([messageID isKindOfClass:[NSNumber class]]) {
+                self.messageID = [messageID longLongValue];
+            }
+        }
+        {
+            NSNumber *roomID = [jsonObject objectForKey:@"room_id"];
+            if ([roomID isKindOfClass:[NSNumber class]]) {
+                self.roomID = [roomID longLongValue];
+            }
+        }
+        {
+            NSNumber *userID = [jsonObject objectForKey:@"user_id"];
+            if ([userID isKindOfClass:[NSNumber class]]) {
+                self.userID = [userID longLongValue];
+            }
+        }
+        {
+            NSString *createdAt = [jsonObject objectForKey:@"created_at"];
+            if ([createdAt isKindOfClass:[NSString class]]) {
+                self.creationDate = [NSDate cl_dateWithCampfireDateString:createdAt];
+            }
+        }
+    }
+    return self;
 }
 
 - (NSDictionary *)jsonObject
@@ -71,10 +93,51 @@
     return [dict copy];
 }
 
+#pragma mark - NSObject
+
 - (NSString *)description
 {
     NSString *description = [NSString stringWithFormat:@"%@", [self jsonObject]];
     return description;
+}
+
+- (NSUInteger)hash
+{
+    NSUInteger hash = (NSUInteger)(self.messageID);
+    return hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    BOOL isEqual = [object isKindOfClass:[self class]] && (((CLCampfireMessage *)object).messageID == self.messageID);
+    return isEqual;
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self jsonObject] forKey:@"json"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithJSONObject:[aDecoder decodeObjectForKey:@"json"]];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    CLCampfireMessage *message = [[CLCampfireMessage alloc] init];
+    message.messageType = self.messageType;
+    message.body = self.body;
+    message.starred = self.starred;
+    message.messageID = self.messageID;
+    message.roomID = self.roomID;
+    message.userID = self.userID;
+    message.creationDate = self.creationDate;
+    return message;
 }
 
 @end
