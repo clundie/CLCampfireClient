@@ -97,6 +97,7 @@ static const NSTimeInterval _maxRetryInterval = 30.0;
     fetcher.minRetryInterval = _minRetryInterval;
     fetcher.maxRetryInterval = _maxRetryInterval;
     fetcher.credential = _URLCredential;
+    fetcher.cookieStorageMethod = kGTMHTTPFetcherCookieStorageMethodNone;
     [_fetchers addObject:fetcher];
     [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
         [_fetchers removeObject:fetcher];
@@ -149,6 +150,7 @@ static const NSTimeInterval _maxRetryInterval = 30.0;
     fetcher.minRetryInterval = _minRetryInterval;
     fetcher.maxRetryInterval = _maxRetryInterval;
     fetcher.credential = _URLCredential;
+    fetcher.cookieStorageMethod = kGTMHTTPFetcherCookieStorageMethodNone;
     [_fetchers addObject:fetcher];
     [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
         [_fetchers removeObject:fetcher];
@@ -192,6 +194,7 @@ static const NSTimeInterval _maxRetryInterval = 30.0;
     fetcher.minRetryInterval = _minRetryInterval;
     fetcher.maxRetryInterval = _maxRetryInterval;
     fetcher.credential = _URLCredential;
+    fetcher.cookieStorageMethod = kGTMHTTPFetcherCookieStorageMethodNone;
     [_fetchers addObject:fetcher];
     [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
         [_fetchers removeObject:fetcher];
